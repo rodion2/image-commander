@@ -1,0 +1,41 @@
+<div class="container" fxLayout
+     fxLayout="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+     fxFill form="form" xmlns="http://www.w3.org/1999/html">
+  <div class="container" fxLayout fxLayoutAlign="left">
+    <mat-form-field appearance="fill" class="search-field">
+      <mat-label fxFlex="350px">
+        <div>Searched object</div>
+      </mat-label>
+      <input matInput fxLayoutAlign type="text" accept="image/*" [(ngModel)]="keyWord">
+    </mat-form-field>
+    <div class="container">
+      <button class="search-button" mat-stroked-button (click)="searchPhotos(keyWord)" color="primary">
+        Search
+      </button>
+    </div>
+    <div class="container" fxLayout *ngIf="searching" style="margin-left:10px">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+  </div>
+  <div fxLayout fxFlex fxFill class="container image-list" class="image-list">
+    <mat-grid-list fxFlex cols="6">
+      <mat-grid-tile *ngFor="let photo of photos">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+          </mat-card-header>
+          <mat-card-content>
+            <img fxLayoutAlign fxFlex="280px" mat-card-image class="image" src="{{'data:image/jpeg;base64,' + photo.content}}">
+          </mat-card-content>
+          <mat-card-content>
+            <p class="font-10">
+              {{photo.keyName}}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

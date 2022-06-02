@@ -1,6 +1,6 @@
 # ImageCommander
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
+UI with ability to load photos and search loaded photos by content if this photo contain it.
 
 ## Development server
 
