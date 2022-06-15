@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {PhotoCRUDService} from "../photo-saver/photo-c-r-u-d.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Photo} from "../model/photo";
+import {AppConstants} from "../constants/app-constants";
 
 @Component({
   selector: 'app-image-uploader-component',
@@ -11,15 +12,17 @@ import {Photo} from "../model/photo";
 export class ImageUploaderComponent implements OnInit {
   @Input() photos: Photo[] = [];
   @Input() file?: File;
+  @Input() uploading: boolean = false;
 
   constructor(private photoCRUDService: PhotoCRUDService,
               private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.uploading = true;
     this.photoCRUDService.getPhotos().subscribe(result => {
-      // @ts-ignore
-      result.forEach(element => this.photos.push(new Photo(element.keyName, 'data:image/jpeg;base64,' + element.content)));
+      result.forEach(element => this.photos.push(new Photo(element.keyName, AppConstants.BASE_64_PREFIX + element.content)));
+      this.uploading = false;
     });
   }
 
@@ -30,14 +33,13 @@ export class ImageUploaderComponent implements OnInit {
 
   uploadFile(file?: File) {
     if (!file) {
-      this._snackBar.open("Please select the file.", "Close.");
+      this._snackBar.open("Please select the file.", "Close", {duration: 3000});
     } else {
       this.photoCRUDService.uploadPhoto(file).subscribe(photo => {
-        var fileContent;
         this.photoCRUDService.getPhotoContent(photo.key).subscribe(result => {
-          // @ts-ignore
-          this.photos.push(new Photo(photo.key, 'data:image/jpeg;base64,' + result.content));
-          this._snackBar.open("Image has been uploaded.", "Done.");
+          this.photos.push(new Photo(photo.key, AppConstants.BASE_64_PREFIX + result.content));
+          this.file = undefined;
+          this._snackBar.open("Image has been uploaded.", "Done", {duration: 3000});
         });
       });
     }
@@ -48,7 +50,7 @@ export class ImageUploaderComponent implements OnInit {
       this.photos = this.photos.filter(originPhoto => {
         return photo.keyName !== originPhoto.keyName;
       });
-      this._snackBar.open("Image has been deleted.", "Done.");
+      this._snackBar.open("Image has been deleted.", "Done", {duration: 3000});
     });
   }
 }

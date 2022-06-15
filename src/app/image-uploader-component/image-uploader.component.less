@@ -1,25 +1,19 @@
-.file-input {
-  display: none;
+.container {
+  padding: 1%;
 }
 
-.file-name {
-  width: 15%;
+.container-item {
+  margin: 10px 10px 10px 10px;
 }
 
-.upload-button {
-  margin-left: 2%;
-  vertical-align: center;
+.scrolled-content {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow: auto;
 }
 
-.image {
-  display: flex;
-  width: 150px;
-  height: 150px;
-}
-
-.image-list {
-  display: block;
-  padding: 30px;
+.searching-header {
+  padding-left: 2%;
 }
 
 .example-card {
@@ -28,23 +22,28 @@
   max-height: 320px;
 }
 
-.font-10 {
-  font-size: 14px;
+.image {
+  width: 260px;
+  height: 150px;
 }
 
-.item {
-  border-radius: .2em;
-  color: #ffffff;
-  font-family: sans-serif;
-  font-size: 14px;
-  padding: 4em 1em;
-  text-transform: uppercase;
+.fill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden
+}
+.fill img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%
 }
 
-.container {
-  margin: 10px;
+.file-input {
+  display: none;
 }
 
-.attach-button {
-  margin-right: 1%;
+.image-list {
+  display: block;
+  padding: 30px;
 }

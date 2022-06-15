@@ -1,11 +1,11 @@
 import {Byte} from "@angular/compiler/src/util";
 
 export class ImageDto {
-  get content(): number[] {
+  get content(): string {
     return this._content;
   }
 
-  set content(value: Byte[]) {
+  set content(value: string) {
     this._content = value;
   }
 
@@ -18,9 +18,9 @@ export class ImageDto {
   }
 
   private _keyName: string;
-  private _content: Byte[];
+  private _content: string;
 
-  constructor(keyName: string, content: number[]) {
+  constructor(keyName: string, content: string) {
     this._keyName = keyName;
     this._content = content;
   }

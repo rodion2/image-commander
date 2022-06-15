@@ -1,35 +1,43 @@
-<div class="container" fxLayout
+<div class="container"
      fxLayout="column"
-     fxLayoutAlign="center"
-     fxLayoutGap="10px"
-     fxFill>
-  <input type="file" accept="image/*" class="file-input"
-         (change)="onFileSelected($event)" #fileUpload>
-
-  <div class="container" fxLayout fxLayoutAlign="left" fxFlex="15%">
-    <button mat-mini-fab color="primary" class="attach-button container"
-            (click)="fileUpload.click()">
-      <mat-icon>attach_file</mat-icon>
-    </button>
-    <mat-form-field class="container" fxFlex="35%" appearance="fill" class="file-name">
-      <mat-label>
-        <div>Chosen File</div>
-      </mat-label>
-      <input matInput value="{{file ? file.name : ''}}" readonly>
-    </mat-form-field>
-    <div class="button-container container">
-      <button class="upload-button" mat-stroked-button (click)="uploadFile(file)" color="primary">Upload</button>
+     fxFlex>
+  <div>
+    <div class="container-item">
+      <input type="file" accept="image/*" class="file-input"
+             (change)="onFileSelected($event)" #fileUpload>
+      <button mat-mini-fab color="primary" class="attach-button"
+              (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+    </div>
+    <div fxFlex class="container-item">
+      <mat-form-field appearance="fill" fxFill>
+        <mat-label>
+          <div>Chosen File</div>
+        </mat-label>
+        <input matInput value="{{file ? file.name : ''}}" readonly>
+      </mat-form-field>
+    </div>
+    <div fxFlex fxLayoutAlign="left" class="container-item">
+      <div>
+        <button class="upload-button" mat-stroked-button (click)="uploadFile(file)" color="primary">
+          Upload
+        </button>
+      </div>
     </div>
   </div>
-  <div fxLayout fxFlex fxFill class="container image-list">
-    <mat-grid-list fxFlex cols="6">
-      <mat-grid-tile *ngFor="let photo of photos">
+  <div fxLayout="column" fxFlex fxFill>
+    <h1 class="uploaded-header">Uploaded photos:</h1>
+    <div fxFlex fxLayoutAlign="center center" *ngIf="uploading">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+    <mat-grid-list *ngIf="!uploading" fxFlex cols="6" class="scrolled-content">
+      <mat-grid-tile *ngFor="let photo of photos" class="grid-tile">
         <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-          </mat-card-header>
           <mat-card-content>
-            <img fxLayoutAlign fxFlex="280px" mat-card-image class="image" src="{{photo.fileContent}}">
+            <div class="fill">
+              <img mat-card-image class="image" src="{{photo.fileContent}}">
+            </div>
           </mat-card-content>
           <mat-card-content>
             <p class="font-10">

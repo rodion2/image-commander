@@ -1,39 +1,40 @@
-<div class="container" fxLayout
+<div class="container"
      fxLayout="column"
-     fxLayoutAlign="center"
-     fxLayoutGap="10px"
-     fxFill form="form" xmlns="http://www.w3.org/1999/html">
-  <div class="container" fxLayout fxLayoutAlign="left">
-    <mat-form-field appearance="fill" class="search-field">
+     fxFlex>
+  <div class="container-item">
+    <mat-form-field fxFlex="50%" appearance="fill">
       <mat-label fxFlex="350px">
         <div>Searched object</div>
       </mat-label>
       <input matInput fxLayoutAlign type="text" accept="image/*" [(ngModel)]="keyWord">
     </mat-form-field>
-    <div class="container">
+    <div class="container-item">
       <button class="search-button" mat-stroked-button (click)="searchPhotos(keyWord)" color="primary">
         Search
       </button>
     </div>
-    <div class="container" fxLayout *ngIf="searching" style="margin-left:10px">
+  </div>
+  <div fxFill fxFlex fxLayout="column">
+    <h1 class="searching-header">Found photo with named object: {{keyWord}}</h1>
+    <div fxFlex fxLayoutAlign="center center" *ngIf="searching">
       <mat-spinner [diameter]="50"></mat-spinner>
     </div>
-  </div>
-  <div fxLayout fxFlex fxFill class="container image-list" class="image-list">
-    <mat-grid-list fxFlex cols="6">
+    <div *ngIf="emptyPhoto" class="not-found-header">No photo found with provided object.</div>
+    <mat-grid-list *ngIf="!emptyPhoto" fxFlex cols="6" class="scrolled-content">
       <mat-grid-tile *ngFor="let photo of photos">
         <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-          </mat-card-header>
           <mat-card-content>
-            <img fxLayoutAlign fxFlex="280px" mat-card-image class="image" src="{{'data:image/jpeg;base64,' + photo.content}}">
+            <div class="fill">
+              <img mat-card-image class="image" src="{{photo.content}}">
+            </div>
           </mat-card-content>
           <mat-card-content>
             <p class="font-10">
               {{photo.keyName}}
             </p>
           </mat-card-content>
+          <mat-card-actions>
+          </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>

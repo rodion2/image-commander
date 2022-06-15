@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ImageDto} from "../model/image-dto";
-import {NgModel} from "@angular/forms";
+import {AppConstants} from "../constants/app-constants";
 
 @Component({
   selector: 'app-image-searcher-component',
@@ -9,19 +9,15 @@ import {NgModel} from "@angular/forms";
   styleUrls: ['./image-searcher.component.less']
 })
 export class ImageSearcherComponent implements OnInit {
-  private BASE_SERVER_URI = "http://localhost:8080/";
-  private SEARCH_URI = "search/";
-  private GET_IMAGES_URI = "images"
+
 
   constructor(private httpClient: HttpClient) {
   }
 
-  // @ts-ignore
-  @Input() photos: ImageDto[];
-  // @ts-ignore
-  @Input() keyWord: String;
-  // @ts-ignore
-  @Input() searching: boolean;
+  @Input() photos: ImageDto[] = [];
+  @Input() keyWord: String = "";
+  @Input() searching: boolean = false;
+  @Input() emptyPhoto: boolean = false;
 
 
   ngOnInit(): void {
@@ -29,12 +25,17 @@ export class ImageSearcherComponent implements OnInit {
 
   public searchPhotos(keyWord: String) {
     this.searching = true;
+    this.emptyPhoto = false;
     if (this.photos) {
       this.photos = [];
     }
-    this.httpClient.get(this.BASE_SERVER_URI + this.SEARCH_URI + this.GET_IMAGES_URI + "/?object-name=" + keyWord)
+    this.httpClient.get(AppConstants.BASE_SERVER_URI + AppConstants.SEARCH_URI + AppConstants.GET_IMAGES_URI + "/?object-name=" + keyWord)
       .subscribe(result => {
         this.photos = result as ImageDto[];
+        this.photos.forEach(photo => {
+          photo.content = AppConstants.BASE_64_PREFIX + photo.content;
+        });
+        this.emptyPhoto = this.photos.length === 0;
         this.searching = false;
       });
   }

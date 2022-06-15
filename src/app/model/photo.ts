@@ -1,29 +1,25 @@
-import {Byte} from "@angular/compiler/src/util";
-
 export class Photo {
-  get fileContent(): Byte[] {
+  private _keyName: string;
+  private _fileContent: string;
+
+  get fileContent(): string {
     return this._fileContent;
   }
 
-  set fileContent(value: Byte[]) {
+  set fileContent(value: string) {
     this._fileContent = value;
   }
 
-  set keyName(value: String) {
+  set keyName(value: string) {
     this._keyName = value;
   }
 
 
-
-  get keyName(): String {
+  get keyName(): string {
     return this._keyName;
   }
 
-
-  private _keyName: String;
-  private _fileContent: Byte[];
-
-  constructor(fileName: String, fileContent: Byte[]) {
+  constructor(fileName: string, fileContent: string) {
     this._keyName = fileName;
     this._fileContent = fileContent;
   }
