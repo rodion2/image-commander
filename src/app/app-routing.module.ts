@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ImageUploaderComponent} from "./image-uploader-component/image-uploader.component";
-import {ImageSearcherComponent} from "./image-searcher-component/image-searcher.component";
+import {LoginPageComponent} from "./login-page/login-page.component";
+import {ImageComponent} from "./image-component/image.component";
 
 const routes: Routes = [
-  // {path: 'upload', component: ImageUploaderComponent},
-  // {path: 'search', component: ImageSearcherComponent}
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'login', component: LoginPageComponent},
+  {path: 'image', component: ImageComponent}
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

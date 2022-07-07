@@ -19,12 +19,16 @@ import {FormsModule} from "@angular/forms";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {FlexModule} from "@angular/flex-layout";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { LoginPageComponent } from './login-page/login-page.component';
+import { ImageComponent } from './image-component/image.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ImageUploaderComponent,
-    ImageSearcherComponent
+    ImageSearcherComponent,
+    LoginPageComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
