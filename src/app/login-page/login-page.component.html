@@ -14,10 +14,10 @@
     </mat-form-field>
     <span class="button-pane" fxFlex fxLayout="row" fxLayoutAlign="space-around">
       <span>
-        <button mat-stroked-button>Login</button>
+        <button mat-stroked-button (click)="authenticate()">Login</button>
       </span>
       <span>
-        <button mat-stroked-button>Forgot password</button>
+        <button mat-button>Forgot password</button>
       </span>
     </span>
   </div>

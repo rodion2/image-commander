@@ -19,8 +19,9 @@ import {FormsModule} from "@angular/forms";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {FlexModule} from "@angular/flex-layout";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import { LoginPageComponent } from './login-page/login-page.component';
-import { ImageComponent } from './image-component/image.component';
+import {LoginPageComponent} from './login-page/login-page.component';
+import {ImageComponent} from './image-component/image.component';
+import {AuthenticationService} from "./service/authentication.service";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { ImageComponent } from './image-component/image.component';
     FlexModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
